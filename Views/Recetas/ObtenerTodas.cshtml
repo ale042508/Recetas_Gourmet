@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewData["Title"] = "ObtenerTodas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<Pais>
+<div class="container">
+    <h2 class="text-center mb-5">Recetas de todos los países</h2>
+    <div class="row">
+        @foreach (var pais in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@pais.Bandera" class="card-img-top" alt="@pais.Nombre">
+                    <div class="card-body">
+                        <h5 class="card-title">@pais.Nombre</h5>
+                    </div>
+                    <div class="card-footer">
+                        <h6 class="text-muted">Recetas:</h6>
+                        <ul class="list-group list-group-flush">
+                            @foreach (var receta in pais.Recetas)
+                            {
+                                <li class="list-group-item">
+                                    <a href="#" data-toggle="modal" data-target="#modal-@receta.Id">
+                                        <img src="@receta.Imagen" class="img-thumbnail mr-3" style="max-width: 70px;">
+                                        @receta.Nombre
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal de la receta -->
+            @foreach (var receta in pais.Recetas)
+            {
+                <div class="modal fade" id="modal-@receta.Id" tabindex="-1" role="dialog" aria-labelledby="modal-@receta.Id-label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal-@receta.Id-label">@receta.Nombre</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>@receta.Descripcion</p>
+                                <img src="@receta.Imagen" class="img-fluid">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

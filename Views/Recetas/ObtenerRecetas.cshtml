@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Biblioteca_Recetas.Models.Receta>
+
+@{
+	ViewData["Title"] = "ObtenerRecetas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+	<a href="@Url.Action("ObtenerPaises", "Recetas")" class="btn btn-primary mt-3"><i class="fa fa-arrow-left"></i> Volver a la lista de países</a>
+</div>
+
+<div class="container">
+	<div class="row">
+
+		@foreach (var receta in Model)
+		{
+			<div class="col-md-4 mb-3">
+				<div class="text-center">
+					<h3>@receta.Nombre</h3>
+					<img src="@receta.Imagen" style="width: 300px; height: 200px;" alt="@receta.Nombre" class="mr-3">
+					<p>@receta.Descripcion</p>
+				</div>
+			</div>
+		}
+	</div>
+</div>
